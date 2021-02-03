@@ -16,6 +16,7 @@
 	-webkit-transition: 0.3s;
 	-o-transition: 0.3s;
 	transition: 0.3s;
+	outline: none;
 }
 
 .popup__close-icon:hover,
