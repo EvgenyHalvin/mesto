@@ -18,8 +18,11 @@
 	transition: 0.2s;
 }
 
-.submit-button:hover {
+.submit-button:hover,
+.submit-button:active,
+.submit-button:focus {
 	background-color: rgb(0, 0, 0, 0.8);
+	outline: none;
 }
 
 @media screen and (max-width: 879px) {

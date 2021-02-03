@@ -18,7 +18,9 @@
 	transition: 0.3s;
 }
 
-.popup__close-icon:hover {
+.popup__close-icon:hover,
+.popup__close-icon:active {
+	outline: none;
 	opacity: 0.6;
 }
 
