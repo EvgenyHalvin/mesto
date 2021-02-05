@@ -3,8 +3,8 @@ let popup = document.querySelector('.popup');
 let popupCloseButton = document.querySelector('.popup__close-icon');
 let profileName = document.querySelector('.profile__name');
 let profileDescription = document.querySelector('.profile__description');
-let popupProfileName = document.querySelector('.popup_field_name');
-let popupProfileDescription = document.querySelector('.popup_field_description');
+let popupProfileName = document.querySelector('.popup__field_type_name');
+let popupProfileDescription = document.querySelector('.popup__field_type_description');
 let form = document.querySelector('.popup__form');
 
 popupProfileName.value = profileName.textContent;
