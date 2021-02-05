@@ -12,6 +12,7 @@ popupProfileDescription.value = profileDescription.textContent;
 
 function showPopup() {
 	popup.classList.add('popup_opened');
+	popupProfileName.value = profileName.textContent;
 }
 
 function closePopup() {
