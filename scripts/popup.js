@@ -7,12 +7,10 @@ let popupProfileName = document.querySelector('.popup__field_type_name');
 let popupProfileDescription = document.querySelector('.popup__field_type_description');
 let form = document.querySelector('.popup__form');
 
-popupProfileName.value = profileName.textContent;
-popupProfileDescription.value = profileDescription.textContent;
-
 function showPopup() {
-	popup.classList.add('popup_opened');
 	popupProfileName.value = profileName.textContent;
+	popupProfileDescription.value = profileDescription.textContent;
+	popup.classList.add('popup_opened');
 }
 
 function closePopup() {
