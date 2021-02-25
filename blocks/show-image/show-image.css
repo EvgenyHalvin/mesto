@@ -1,4 +1,4 @@
-.popup {
+.show-image {
 	display: flex;
 	position: fixed;
 	-webkit-box-orient: vertical;
@@ -8,7 +8,8 @@
 	top: 0;
 	height: 100vh;
 	width: 100vw;
-	background-color: rgb(0, 0, 0, 0.5);
+	background-color: rgb(0, 0, 0, 0.9);
+  transition: visibility 0s, opacity 0.5s linear;
 	visibility: hidden;
 	opacity: 0;
 	transition: 0.4s linear;

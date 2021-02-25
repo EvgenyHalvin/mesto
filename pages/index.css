@@ -30,6 +30,8 @@
 @import url(../blocks/element/__like/element__like.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/element/__remove/element__remove.css);
+@import url(../blocks/element/__like/_active/element__like_active.css);
 
 /* Стили для popup */
 @import url(../blocks/popup/popup.css);
@@ -40,3 +42,10 @@
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
+
+/* Тсили для show-image */
+@import url(../blocks/show-image/show-image.css);
+@import url(../blocks/show-image/__container/show-image__container.css);
+@import url(../blocks/show-image/__full-size/show-image__full-size.css);
+@import url(../blocks/show-image/__description/show-image__description.css);
+@import url(../blocks/show-image/_opened/show-image_opened.css);
