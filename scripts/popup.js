@@ -115,7 +115,7 @@ function likeCard(event) {
 
 
 //Попап картинки
-const closeImage = document.querySelector('.popup__close-icon_close-image');
+const closeImage = document.querySelector('.show-image__close-icon_close-image');
 const showImage = document.querySelector('.show-image');
 const fullCardImage = document.querySelector('.show-image__full-size');
 const fullCardName = document.querySelector('.show-image__description');
