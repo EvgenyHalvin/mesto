@@ -1,5 +1,5 @@
 const addEditButton = document.querySelector('.profile__edit-button');
-const popupEdit = document.querySelector('.popup_edit');
+const popupEdit = document.querySelector('.popup_type_edit');
 const popupCloseButton = document.querySelector('.popup__close-icon');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -33,7 +33,7 @@ form.addEventListener('submit', subInfo);
 
 //Открытие попапа для добавления карточки
 const addCardButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_add-card');
+const popupAddCard = document.querySelector('.popup_type_add-card');
 const closeButtonAddCard = document.querySelector('.popup__close-icon_add-card');
 const nameNewPlace = document.querySelector('.popup__field_type_place');
 const linkToImg = document.querySelector('.popup__field_type_link-to-img');
@@ -102,7 +102,7 @@ function likeCard(event) {
 
 //Попап картинки
 const closeImage = document.querySelector('.popup__close-icon_show-image');
-const showImage = document.querySelector('.popup_show-image');
+const showImage = document.querySelector('.popup_type_show-image');
 const fullCardImage = document.querySelector('.popup__image');
 const fullCardName = document.querySelector('.popup__title_show-image');
 
