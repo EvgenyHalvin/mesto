@@ -31,21 +31,13 @@ function subInfo(event) {
 form.addEventListener('submit', subInfo);
 
 
-//Открытие попапа для добавления карточки
-const addCardButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_type_add-card');
-const closeButtonAddCard = document.querySelector('.popup__close-icon_add-card');
-const nameNewPlace = document.querySelector('.popup__field_type_place');
-const linkToImg = document.querySelector('.popup__field_type_link-to-img');
-const formAddCard = document.querySelector('.popup__form_add-card');
-
-addCardButton.addEventListener('click', () => showPopup(popupAddCard));
-closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
-
-
-//Динамический рендер массива
+//Динамический рендер массива и открытие попапа полноразмерной картинки(функция fullCard)
 const cardTemplate = document.querySelector('#card').content; 
 const cards = document.querySelector('.elements');
+const closeImage = document.querySelector('.popup__close-icon_show-image');
+const showImage = document.querySelector('.popup_type_show-image');
+const fullCardImage = document.querySelector('.popup__image');
+const fullCardName = document.querySelector('.popup__title_show-image');
 
 function cardContent(arrCards) {
 	const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -54,9 +46,22 @@ function cardContent(arrCards) {
 	const cardImage = cardElement.querySelector('.element__image');
 	cardImage.alt = arrCards.name;
 	cardImage.src = arrCards.link;
+
+	function fullCard() {
+		fullCardImage.src = arrCards.link;
+		fullCardImage.alt = arrCards.name;
+		fullCardName.textContent = arrCards.name;
+		showImage.classList.add('popup_opened');
+	} 
+	//Внес функцию fullCard в тело функции рендера каждой отдельной карточки,
+	//чтобы при удалении этой карточки из памяти
+	//также удалялась функция fullCard (по рекомендации старшего стундента группы)
+
 	cardImage.addEventListener('click', fullCard);
+
 	const removeButton = cardElement.querySelector('.element__remove');
 	removeButton.addEventListener('click', removeCard);
+
 	const likeButton = cardElement.querySelector('.element__like');
 	likeButton.addEventListener('click', likeCard);
 
@@ -70,6 +75,21 @@ function addCards (cardEL) {
 initialCards.forEach(function (arrCards) {
 	addCards(cardContent(arrCards));
 })
+
+//Закрытие попапа с полноразмерной картинкой
+closeImage.addEventListener('click', () => closePopup(showImage));
+
+
+//Открытие попапа для добавления карточки
+const addCardButton = document.querySelector('.profile__add-button');
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const closeButtonAddCard = document.querySelector('.popup__close-icon_add-card');
+const nameNewPlace = document.querySelector('.popup__field_type_place');
+const linkToImg = document.querySelector('.popup__field_type_link-to-img');
+const formAddCard = document.querySelector('.popup__form_add-card');
+
+addCardButton.addEventListener('click', () => showPopup(popupAddCard));
+closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
 
 
 //Добавление карточки при отправке формы
@@ -98,23 +118,3 @@ function removeCard(event) {
 function likeCard(event) {
 	event.target.classList.toggle('element__like_active');
 }
-
-
-//Попап картинки
-const closeImage = document.querySelector('.popup__close-icon_show-image');
-const showImage = document.querySelector('.popup_type_show-image');
-const fullCardImage = document.querySelector('.popup__image');
-const fullCardName = document.querySelector('.popup__title_show-image');
-
-function fullCard(event) {
-	const targetCard = event.target;
-	const targetItem = targetCard.closest('.element');
-	const cardName = targetItem.querySelector('.element__name');
-	const cardImage = targetItem.querySelector('.element__image');
-	fullCardImage.src = cardImage.src;
-	fullCardImage.alt = cardName.textcontent;
-	fullCardName.textContent = cardName.textContent;
-	showImage.classList.add('popup_opened');
-}
-
-closeImage.addEventListener('click', () => closePopup(showImage));
