@@ -9,8 +9,6 @@ const form = document.querySelector('.popup__form');
 
 
 function showPopup(popup) {
-	popupProfileName.value = profileName.textContent;
-	popupProfileDescription.value = profileDescription.textContent;
 	popup.classList.add('popup_opened');
 }
 
@@ -18,7 +16,12 @@ function closePopup(popup) {
 	popup.classList.remove('popup_opened');
 }
 
-	addEditButton.addEventListener('click', () => showPopup(popupEdit));
+	addEditButton.addEventListener('click', () => {
+		popupProfileName.value = profileName.textContent;
+		popupProfileDescription.value = profileDescription.textContent;
+		showPopup(popupEdit);
+	});
+		 
 	popupCloseButton.addEventListener('click', () => closePopup(popupEdit));
 
 function subInfo(event) {
@@ -51,13 +54,12 @@ function cardContent(arrCards) {
 		fullCardImage.src = arrCards.link;
 		fullCardImage.alt = arrCards.name;
 		fullCardName.textContent = arrCards.name;
-		showImage.classList.add('popup_opened');
 	} 
-	//Внес функцию fullCard в тело функции рендера каждой отдельной карточки,
-	//чтобы при удалении этой карточки из памяти
-	//также удалялась функция fullCard (по рекомендации старшего стундента группы)
 
-	cardImage.addEventListener('click', fullCard);
+	cardImage.addEventListener('click', () => {
+		showPopup(showImage)
+		fullCard();
+	});
 
 	const removeButton = cardElement.querySelector('.element__remove');
 	removeButton.addEventListener('click', removeCard);
