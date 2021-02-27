@@ -37,7 +37,7 @@
         </footer>
     </div>
 
-    <div class="popup">
+    <div class="popup popup_edit">
         <div class="popup__container">
             <button type="button" class="popup__close-icon"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
@@ -56,20 +56,18 @@
             <button type="button" class="popup__close-icon popup__close-icon_add-card"></button>
             <h3 class="popup__title">Новое место</h3>
             <form name="popupForm" class="popup__form popup__form_add-card">
-                <input type="text" name="place" class="popup__field popup__field_type_place" placeholder="Название"
-                    required>
-                <input type="text" name="link" class="popup__field popup__field_type_link-to-img"
-                    placeholder="Ссылка на картинку" required>
+                <input type="text" name="place" class="popup__field popup__field_type_place" placeholder="Название" required>
+                <input type="url" name="link" class="popup__field popup__field_type_link-to-img" placeholder="Ссылка на картинку" required>
                 <button type="submit" name="save" class="popup__submit-button">Сохранить</button>
             </form>
         </div>
     </div>
-
-    <div class="show-image">
-        <div class="show-image__container">
-            <button type="button" class="show-image__close-icon show-image__close-icon_close-image"></button>
-            <img src="someimage.jpg" alt="some-image" class="show-image__full-size">
-            <p class="show-image__description"></p>
+ 
+    <div class="popup popup_show-image">
+        <div class="popup__container popup__container_show-image">
+            <button type="button" class="popup__close-icon popup__close-icon_show-image"></button>
+            <img src="#" alt="#" class="popup__image">
+            <p class="popup__title popup__title_show-image"></p>
         </div>
     </div>
 </body>
@@ -77,7 +75,7 @@
 <template id="card">
     <div class="element">
         <button class="element__remove"></button>
-        <img src="someimage.jpg" class="element__image" alt="some-image" />
+        <img src="#" class="element__image" alt="#" />
         <div class="element__description">
             <h2 class="element__name"></h2>
             <button type="button" class="element__like"></button>

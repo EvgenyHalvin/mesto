@@ -1,5 +1,5 @@
 const addEditButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+const popupEdit = document.querySelector('.popup_edit');
 const popupCloseButton = document.querySelector('.popup__close-icon');
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -8,25 +8,24 @@ const popupProfileDescription = document.querySelector('.popup__field_type_descr
 const form = document.querySelector('.popup__form');
 
 
-function showPopup() {
+function showPopup(popup) {
 	popupProfileName.value = profileName.textContent;
 	popupProfileDescription.value = profileDescription.textContent;
 	popup.classList.add('popup_opened');
 }
 
-function closePopup() {
+function closePopup(popup) {
 	popup.classList.remove('popup_opened');
 }
 
-	addEditButton.addEventListener('click', showPopup);
+	addEditButton.addEventListener('click', () => showPopup(popupEdit));
+	popupCloseButton.addEventListener('click', () => closePopup(popupEdit));
 
-	popupCloseButton.addEventListener('click', closePopup);
-
-function subInfo() {
+function subInfo(event) {
 	event.preventDefault();
 	profileName.textContent = popupProfileName.value;
 	profileDescription.textContent = popupProfileDescription.value;
-	closePopup();
+	closePopup(popupEdit);
 }
  
 form.addEventListener('submit', subInfo);
@@ -40,27 +39,13 @@ const nameNewPlace = document.querySelector('.popup__field_type_place');
 const linkToImg = document.querySelector('.popup__field_type_link-to-img');
 const formAddCard = document.querySelector('.popup__form_add-card');
 
-function showPopupAddCard () {
-	nameNewPlace.value = '';
-	linkToImg.value = '';
-	popupAddCard.classList.add('popup_opened');
-}
-
-function closePopupAddCard () {
-	popupAddCard.classList.remove('popup_opened');
-}
-
-addCardButton.addEventListener('click', showPopupAddCard);
-closeButtonAddCard.addEventListener('click', closePopupAddCard);
+addCardButton.addEventListener('click', () => showPopup(popupAddCard));
+closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
 
 
 //Динамический рендер массива
 const cardTemplate = document.querySelector('#card').content; 
 const cards = document.querySelector('.elements');
-
-function addCards (cardEL) {
-	cards.prepend(cardEL)
-}
 
 function cardContent(arrCards) {
 	const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -78,13 +63,17 @@ function cardContent(arrCards) {
 	return cardElement;
 }
 
+function addCards (cardEL) {
+	cards.prepend(cardEL)
+}
+
 initialCards.forEach(function (arrCards) {
 	addCards(cardContent(arrCards));
 })
 
 
 //Добавление карточки при отправке формы
-function addCard (eventSubmit) {
+function addCard (event) {
 	event.preventDefault();
 	const inputCardName = nameNewPlace.value;
 	const inputlinkImage = linkToImg.value;
@@ -92,10 +81,8 @@ function addCard (eventSubmit) {
 
 	addCards(newCard);
 
-	nameNewPlace.value = '';
-	linkToImg.value = '';
-
-	closePopupAddCard();
+	formAddCard.reset();
+	closePopup(popupAddCard);
 }
 
 formAddCard.addEventListener('submit', addCard);
@@ -103,8 +90,7 @@ formAddCard.addEventListener('submit', addCard);
 
 //Удаление карточки
 function removeCard(event) {
-	const targetCard = event.target.closest('.element');
-	targetCard.remove();
+	event.target.closest('.element').remove();
 }
 
 
@@ -115,10 +101,10 @@ function likeCard(event) {
 
 
 //Попап картинки
-const closeImage = document.querySelector('.show-image__close-icon_close-image');
-const showImage = document.querySelector('.show-image');
-const fullCardImage = document.querySelector('.show-image__full-size');
-const fullCardName = document.querySelector('.show-image__description');
+const closeImage = document.querySelector('.popup__close-icon_show-image');
+const showImage = document.querySelector('.popup_show-image');
+const fullCardImage = document.querySelector('.popup__image');
+const fullCardName = document.querySelector('.popup__title_show-image');
 
 function fullCard(event) {
 	const targetCard = event.target;
@@ -128,11 +114,7 @@ function fullCard(event) {
 	fullCardImage.src = cardImage.src;
 	fullCardImage.alt = cardName.textcontent;
 	fullCardName.textContent = cardName.textContent;
-	showImage.classList.add('show-image_opened');
-	closeImage.addEventListener('click', closeFullCard);
+	showImage.classList.add('popup_opened');
 }
 
-
-function closeFullCard() {
-	showImage.classList.remove('show-image_opened');
-}
+closeImage.addEventListener('click', () => closePopup(showImage));

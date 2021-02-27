@@ -37,16 +37,13 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__close-icon/popup__close-icon.css);
+@import url(../blocks/popup/__close-icon/_show-image/popup__close-icon_show-image.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__container/_show-image/popup__container_show-image.css);
+@import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__title/_show-image/popup__title_show-image.css);
 @import url(../blocks/popup/__field/popup__field.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
-
-/* Тсили для show-image */
-@import url(../blocks/show-image/show-image.css);
-@import url(../blocks/show-image/__container/show-image__container.css);
-@import url(../blocks/show-image/__full-size/show-image__full-size.css);
-@import url(../blocks/show-image/__description/show-image__description.css);
-@import url(../blocks/show-image/_opened/show-image_opened.css);
-@import url(../blocks/show-image/__close-icon/show-image__close-icon.css);
+@import url(../blocks/popup/_show-image/popup_show-image.css);

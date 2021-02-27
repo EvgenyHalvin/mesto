@@ -10,13 +10,13 @@
 	-webkit-transform: rotate(-45deg);
 	    -ms-transform: rotate(-45deg);
 	        transform: rotate(-45deg);
-	-ms-flex-item-align: end;
-	    align-self: flex-end;
-	margin: -40px -40px 0 0;
 	-webkit-transition: 0.3s;
 	-o-transition: 0.3s;
 	transition: 0.3s;
 	outline: none;
+	position: absolute;
+	top: -40px;
+	right: -40px;
 }
 
 .popup__close-icon:hover,
@@ -27,7 +27,7 @@
 
 @media screen and (max-width: 879px) {
 	.popup__close-icon {
-		margin: -45px 0 0 0;
+		right: 0;
 		width: 26px;
 		height: 26px;
 	}
