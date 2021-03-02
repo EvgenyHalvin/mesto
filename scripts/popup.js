@@ -5,7 +5,7 @@ const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
 const popupProfileName = document.querySelector('.popup__field_type_name');
 const popupProfileDescription = document.querySelector('.popup__field_type_description');
-const form = document.querySelector('.popup__form');
+const formEditPopup = document.querySelector('.popup__form_type_edit');
 
 
 function showPopup(popup) {
@@ -18,22 +18,22 @@ function closePopup(popup) {
 	document.removeEventListener('keydown', closePopupByClickOnEsc);
 }
 
-	addEditButton.addEventListener('click', () => {
-		popupProfileName.value = profileName.textContent;
-		popupProfileDescription.value = profileDescription.textContent;
-		showPopup(popupEdit);
-	});
+addEditButton.addEventListener('click', () => {
+	popupProfileName.value = profileName.textContent;
+	popupProfileDescription.value = profileDescription.textContent;
+	showPopup(popupEdit);
+});
 		 
-	popupCloseButton.addEventListener('click', () => closePopup(popupEdit));
+popupCloseButton.addEventListener('click', () => closePopup(popupEdit));
 
-function subInfo(event) {
+const editProfileInfo = (event) => {
 	event.preventDefault();
 	profileName.textContent = popupProfileName.value;
 	profileDescription.textContent = popupProfileDescription.value;
 	closePopup(popupEdit);
 }
  
-form.addEventListener('submit', subInfo);
+formEditPopup.addEventListener('submit', editProfileInfo);
 
 
 //Динамический рендер массива и открытие попапа полноразмерной картинки(функция fullCard)
@@ -44,7 +44,7 @@ const showImage = document.querySelector('.popup_type_show-image');
 const fullCardImage = document.querySelector('.popup__image');
 const fullCardName = document.querySelector('.popup__title_show-image');
 
-function cardContent(arrCards) {
+function getCardContent(arrCards) {
 	const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 	const cardName = cardElement.querySelector('.element__name');
 	cardName.textContent = arrCards.name;
@@ -77,7 +77,7 @@ function addCards (cardEL) {
 }
 
 initialCards.forEach(function (arrCards) {
-	addCards(cardContent(arrCards));
+	addCards(getCardContent(arrCards));
 })
 
 //Закрытие попапа с полноразмерной картинкой
@@ -101,7 +101,7 @@ function addCard (event) {
 	event.preventDefault();
 	const inputCardName = nameNewPlace.value;
 	const inputlinkImage = linkToImg.value;
-	const newCard = cardContent({name: inputCardName, link: inputlinkImage});
+	const newCard = getCardContent({name: inputCardName, link: inputlinkImage});
 
 	addCards(newCard);
 
@@ -125,13 +125,13 @@ function likeCard(event) {
 
 
 //Закрытие по клику на оверлэй
-const AllPopup = document.querySelectorAll('.popup');
+const PopupList = document.querySelectorAll('.popup');
 
 function closePopupByClickOnOverlay(event) {
     closePopup(event.target);
 };
 
-AllPopup.forEach(closeOverlay => closeOverlay.addEventListener('mousedown', closePopupByClickOnOverlay));
+PopupList.forEach(closeOverlay => closeOverlay.addEventListener('mousedown', closePopupByClickOnOverlay));
 
 
 //Закрытие попапа по ECS
