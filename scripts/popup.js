@@ -102,8 +102,6 @@ addCardButton.addEventListener('click', () => {
 });
 closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
 
-
-
 function cleanErorrs (popup) {
 	const spanError = popup.querySelectorAll('.popup__field-error');
 	const fieldError = popup.querySelectorAll('.popup__field');
@@ -115,18 +113,7 @@ function cleanErorrs (popup) {
 	fieldError.forEach(element => {
 		element.classList.remove('popup__field_type_error');
 	});
-	
-	
 }
-
-
-
-
-
-
-
-
-
 
 //Добавление карточки при отправке формы
 function addCard (event) {
