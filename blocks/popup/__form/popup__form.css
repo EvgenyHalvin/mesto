@@ -1,7 +1,4 @@
 .popup__form {
+	font-family: 'Inter', Arial, sans-serif;
 	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	padding: 0;
-	margin: auto;
 }

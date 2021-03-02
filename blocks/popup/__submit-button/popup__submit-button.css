@@ -1,9 +1,9 @@
 .popup__submit-button {
 	height: 50px;
 	width: 358px;
-	margin: 0 36px 37px;
+	margin: 48px 36px 37px;
 	border-radius: 2px;
-	border: 0;
+	border: 1px;
 	background-color: #000;
 	font-family: 'Inter', Arial, sans-serif;
 	font-style: normal;
@@ -22,7 +22,7 @@
 .popup__submit-button:active,
 .popup__submit-button:focus {
 	background-color: rgb(0, 0, 0, 0.8);
-	outline: none;
+	color: #fff;
 }
 
 @media screen and (max-width: 879px) {

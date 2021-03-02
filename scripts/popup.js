@@ -10,10 +10,12 @@ const form = document.querySelector('.popup__form');
 
 function showPopup(popup) {
 	popup.classList.add('popup_opened');
+	document.addEventListener('keydown', closePopupByClickOnEsc);
 }
 
 function closePopup(popup) {
 	popup.classList.remove('popup_opened');
+	document.removeEventListener('keydown', closePopupByClickOnEsc);
 }
 
 	addEditButton.addEventListener('click', () => {
@@ -120,3 +122,24 @@ function removeCard(event) {
 function likeCard(event) {
 	event.target.classList.toggle('element__like_active');
 }
+
+
+//Закрытие по клику на оверлэй
+const AllPopup = document.querySelectorAll('.popup');
+
+function closePopupByClickOnOverlay(event) {
+    closePopup(event.target);
+};
+
+AllPopup.forEach(closeOverlay => closeOverlay.addEventListener('mousedown', closePopupByClickOnOverlay));
+
+
+//Закрытие попапа по ECS
+
+function closePopupByClickOnEsc(event) {
+	if(event.key === "Escape"){
+		const activePopup = document.querySelector('.popup_opened');
+		closePopup(activePopup);
+	}
+}
+
