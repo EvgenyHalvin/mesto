@@ -21,10 +21,13 @@ function closePopup(popup) {
 addEditButton.addEventListener('click', () => {
 	popupProfileName.value = profileName.textContent;
 	popupProfileDescription.value = profileDescription.textContent;
+	cleanErorrs(popupEdit);
 	showPopup(popupEdit);
 });
 		 
-popupCloseButton.addEventListener('click', () => closePopup(popupEdit));
+popupCloseButton.addEventListener('click', () => {
+	closePopup(popupEdit);
+});
 
 const editProfileInfo = (event) => {
 	event.preventDefault();
@@ -92,8 +95,37 @@ const nameNewPlace = document.querySelector('.popup__field_type_place');
 const linkToImg = document.querySelector('.popup__field_type_link-to-img');
 const formAddCard = document.querySelector('.popup__form_add-card');
 
-addCardButton.addEventListener('click', () => showPopup(popupAddCard));
+addCardButton.addEventListener('click', () => {
+	formAddCard.reset();
+	cleanErorrs(popupAddCard);
+	showPopup(popupAddCard);
+});
 closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
+
+
+
+function cleanErorrs (popup) {
+	const spanError = popup.querySelectorAll('.popup__field-error');
+	const fieldError = popup.querySelectorAll('.popup__field');
+
+	spanError.forEach(element => {
+		element.textContent = '';
+	});
+
+	fieldError.forEach(element => {
+		element.classList.remove('popup__field_type_error');
+	});
+	
+	
+}
+
+
+
+
+
+
+
+
 
 
 //Добавление карточки при отправке формы
@@ -106,6 +138,9 @@ function addCard (event) {
 	addCards(newCard);
 
 	formAddCard.reset();
+	const submitButton = event.target.querySelector('.popup__submit-button');
+	submitButton.classList.add('popup__submit-button_disabled');
+	submitButton.setAttribute('disabled', true);
 	closePopup(popupAddCard);
 }
 
@@ -128,7 +163,9 @@ function likeCard(event) {
 const PopupList = document.querySelectorAll('.popup');
 
 function closePopupByClickOnOverlay(event) {
-    closePopup(event.target);
+	if (event.target.classList.contains('popup_opened')) {
+		closePopup(event.target);
+	} 
 };
 
 PopupList.forEach(closeOverlay => closeOverlay.addEventListener('mousedown', closePopupByClickOnOverlay));
