@@ -7,7 +7,6 @@ const popupProfileName = document.querySelector('.popup__field_type_name');
 const popupProfileDescription = document.querySelector('.popup__field_type_description');
 const formEditPopup = document.querySelector('.popup__form_type_edit');
 
-
 function showPopup(popup) {
 	popup.classList.add('popup_opened');
 	document.addEventListener('keydown', closePopupByClickOnEsc);
