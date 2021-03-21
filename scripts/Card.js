@@ -1,4 +1,4 @@
-import {closePopupByClickOnEsc} from './index.js';
+import { closePopupByClickOnEsc } from './index.js';
 
 const showImage = document.querySelector('.popup_type_show-image');
 const fullCardImage = document.querySelector('.popup__image');
@@ -57,7 +57,7 @@ export class Card {
 
         this._element.querySelector('.element__remove').addEventListener('click', () => {
             this._removeCard();
-        })
+        });
     };
 
     generateCard() {

@@ -99,6 +99,7 @@ addCardButton.addEventListener('click', () => {
 	cleanErorrs(popupAddCard);
 	showPopup(popupAddCard);
 });
+
 closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
 
 function cleanErorrs (popup) {
