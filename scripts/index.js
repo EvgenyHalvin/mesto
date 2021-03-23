@@ -1,14 +1,29 @@
 import { Card } from './Card.js';
 import { FormValidator, configValidation } from './FormValidator.js';
 
-const addEditButton = document.querySelector('.profile__edit-button');
-const popupCloseButton = document.querySelector('.popup__close-icon');
-const formEditPopup = document.querySelector('.popup__form_type_edit');
+// Профиль
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+const addEditButton = document.querySelector('.profile__edit-button');
+const addCardButton = document.querySelector('.profile__add-button');
+
+// Попап редактирования профиля
+const popupEdit = document.querySelector('.popup_type_edit');
+const popupCloseButton = document.querySelector('.popup__close-icon');
+
+// Форма редактирования профиля
+const formEditPopup = document.querySelector('.popup__form_type_edit');
 const popupProfileName = document.querySelector('.popup__field_type_name');
 const popupProfileDescription = document.querySelector('.popup__field_type_description');
-const popupEdit = document.querySelector('.popup_type_edit');
+
+// Попап добаления новой карточки
+const popupAddCard = document.querySelector('.popup_type_add-card');
+const closeButtonAddCard = document.querySelector('.popup__close-icon_add-card');
+
+// Форма добаления новой карточки
+const formAddCard = document.querySelector('.popup__form_add-card');
+const nameNewPlace = document.querySelector('.popup__field_type_place');
+const linkToImg = document.querySelector('.popup__field_type_link-to-img');
 
 function showPopup(popup) {
 	popup.classList.add('popup_opened');
@@ -72,13 +87,6 @@ export function closePopupByClickOnEsc(event) {
 };
 
 // Открытие попапа для добавления карточки
-const addCardButton = document.querySelector('.profile__add-button');
-const popupAddCard = document.querySelector('.popup_type_add-card');
-const nameNewPlace = document.querySelector('.popup__field_type_place');
-const closeButtonAddCard = document.querySelector('.popup__close-icon_add-card');
-const linkToImg = document.querySelector('.popup__field_type_link-to-img');
-const formAddCard = document.querySelector('.popup__form_add-card');
-
 addCardButton.addEventListener('click', () => {
 	formAddCard.reset();
 	cleanErorrs(popupAddCard);
@@ -92,7 +100,8 @@ function addCard (event) {
 	event.preventDefault();
 	const inputCardName = nameNewPlace.value;
 	const inputlinkImage = linkToImg.value;
-	const newCard = getCardContent({name: inputCardName, link: inputlinkImage});
+	const newCard = new Card(item, '#card');
+	newCard.generateCard();
 
 	addCards(newCard);
 
