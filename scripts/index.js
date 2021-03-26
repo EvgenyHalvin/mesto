@@ -25,6 +25,9 @@ const formAddCard = document.querySelector('.popup__form_add-card');
 const nameNewPlace = document.querySelector('.popup__field_type_place');
 const linkToImg = document.querySelector('.popup__field_type_link-to-img');
 
+// Коллекция попапов
+const PopupList = document.querySelectorAll('.popup');
+
 function showPopup(popup) {
 	popup.classList.add('popup_opened');
 	document.addEventListener('keydown', closePopupByClickOnEsc);
@@ -98,16 +101,26 @@ closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
 // Добавление карточки при отправке формы
 function addCard (event) {
 	event.preventDefault();
-	const newCard = new Card(item, '#card');
-	newCard.generateCard();
 
-	addCards(newCard);
+	const name = nameNewPlace.value;
+	const link = linkToImg.value;
+
+	addCards(getCard({name, link}));
 
 	formAddCard.reset();
 	const submitButton = event.target.querySelector('.popup__submit-button');
 	submitButton.classList.add('popup__submit-button_disabled');
 	submitButton.setAttribute('disabled', true);
 	closePopup(popupAddCard);
+}
+
+function addCards (cardEl) {
+	cards.prepend(cardEl)
+}
+
+function getCard(item) {
+	const newCard = new Card(item, '#card');
+	return newCard.generateCard();
 }
 
 formAddCard.addEventListener('submit', addCard);
@@ -122,4 +135,13 @@ formValidatorEdit.enableValidation();
 const formTypeAddCard = popupAddCard.querySelector('.popup__form_add-card');
 const formValidatorAddCard = new FormValidator(configValidation, formTypeAddCard);
 formValidatorAddCard.enableValidation();
+
+//Закрытие по клику на оверлэй
+function closePopupByClickOnOverlay(event) {
+	if (event.target.classList.contains('popup_opened')) {
+		closePopup(event.target);
+	} 
+};
+
+PopupList.forEach(closeOverlay => closeOverlay.addEventListener('mouseup', closePopupByClickOnOverlay));
 
