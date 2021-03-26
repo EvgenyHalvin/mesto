@@ -34,12 +34,12 @@ export class Card {
         document.removeEventListener('keydown', closePopupByClickOnEsc);
     };
 
-    _likeCard() {
-        event.target.classList.toggle('element__like_active');
+    _likeCard(evt) {
+        evt.target.classList.toggle('element__like_active');
     };
 
     _removeCard() {
-        event.target.closest('.element').remove();
+        this._element.remove();
     }
 
     _setEventListeners() {
@@ -51,8 +51,8 @@ export class Card {
             this._handleClosePopup();
         });
 
-        this._element.querySelector('.element__like').addEventListener('click', () => {
-            this._likeCard();
+        this._element.querySelector('.element__like').addEventListener('click', (event) => {
+            this._likeCard(event);
         });
 
         this._element.querySelector('.element__remove').addEventListener('click', () => {
