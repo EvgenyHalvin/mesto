@@ -7,9 +7,6 @@
     <link rel="stylesheet" href="pages/index.css" />
     <title>Место</title>
 </head>
-<script src="scripts/cards.js"></script>
-<script src="scripts/popup.js" defer></script>
-<script src="scripts/validate.js" defer></script>
 
 <body>
     <div class="page">
@@ -44,15 +41,11 @@
             <h3 class="popup__title">Редактировать профиль</h3>
             <form name="popupForm" class="popup__form popup__form_type_edit" novalidate>
                 <fieldset class="popup__set">
-                    <input class="popup__field popup__field_type_name"
-                        type="text" id="userName-input" 
-                        name="username" placeholder="Имя" 
-                        minlength="2" maxlength="40" required>
+                    <input class="popup__field popup__field_type_name" type="text" id="userName-input" name="username"
+                        placeholder="Имя" minlength="2" maxlength="40" required>
                     <span class="userName-input-error popup__field-error"></span>
-                    <input class="popup__field popup__field_type_description"
-                        type="text" id="description-input" 
-                        name="profession" placeholder="О себе" 
-                        minlength="2" maxlength="200" required>
+                    <input class="popup__field popup__field_type_description" type="text" id="description-input"
+                        name="profession" placeholder="О себе" minlength="2" maxlength="200" required>
                     <span class="description-input-error popup__field-error" disabled></span>
                     <button type="submit" name="save" class="popup__submit-button">Сохранить</button>
                 </fieldset>
@@ -66,21 +59,18 @@
             <h3 class="popup__title">Новое место</h3>
             <form name="popupForm" class="popup__form popup__form_add-card" novalidate>
                 <fieldset class="popup__set">
-                    <input class="popup__field popup__field_type_place"
-                            type="text" id="placeName-input" 
-                            name="place" placeholder="Название"
-                            minlength="2" maxlength="30" required>
+                    <input class="popup__field popup__field_type_place" type="text" id="placeName-input" name="place"
+                        placeholder="Название" minlength="2" maxlength="30" required>
                     <span class="placeName-input-error popup__field-error"></span>
-                    <input class="popup__field popup__field_type_link-to-img"
-                            type="url" id="linkPlace-input"
-                            name="link" placeholder="Ссылка на картинку" required>
+                    <input class="popup__field popup__field_type_link-to-img" type="url" id="linkPlace-input"
+                        name="link" placeholder="Ссылка на картинку" required>
                     <span class="linkPlace-input-error popup__field-error"></span>
                     <button type="submit" name="save" class="popup__submit-button">Сохранить</button>
                 </fieldset>
             </form>
         </div>
     </div>
- 
+
     <div class="popup popup_type_show-image">
         <div class="popup__container popup__container_show-image">
             <button type="button" class="popup__close-icon popup__close-icon_show-image"></button>
@@ -88,6 +78,11 @@
             <p class="popup__title popup__title_show-image"></p>
         </div>
     </div>
+
+    <script src="scripts/cards.js"></script>
+    <script type="module" src="scripts/index.js" defer></script>
+    <script type="module" src="scripts/Card.js" defer></script>
+    <script type="module" src="scripts/FormValidator.js" defer></script>
 </body>
 
 <template id="card">
