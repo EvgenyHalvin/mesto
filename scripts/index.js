@@ -113,7 +113,7 @@ function addCard(event) {
 
 function resetCardForm(formEl) {
 	formEl.reset();
-	const submitButton = event.target.querySelector('.popup__submit-button');
+	const submitButton = formEl.querySelector('.popup__submit-button');
 	submitButton.classList.add('popup__submit-button_disabled');
 	submitButton.setAttribute('disabled', true);
 }
