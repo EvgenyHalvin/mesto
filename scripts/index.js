@@ -98,8 +98,6 @@ closeButtonAddCard.addEventListener('click', () => closePopup(popupAddCard));
 // Добавление карточки при отправке формы
 function addCard (event) {
 	event.preventDefault();
-	const inputCardName = nameNewPlace.value;
-	const inputlinkImage = linkToImg.value;
 	const newCard = new Card(item, '#card');
 	newCard.generateCard();
 
