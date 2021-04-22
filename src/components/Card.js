@@ -1,7 +1,3 @@
-import {
-
-} from '../utils/constants.js';
-
 export default class Card {
   constructor(item, cardSelector, handleCardClick) {
     this._cardSelector = cardSelector;
