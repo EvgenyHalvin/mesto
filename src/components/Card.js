@@ -29,7 +29,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__image').addEventListener('click', () => {
+    this._elementImg.addEventListener('click', () => {
       this._handleCardClick();
     })
 
@@ -44,11 +44,13 @@ export default class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    this._elementImg = this._element.querySelector('.element__image');
+    this._elementName = this._element.querySelector('.element__name');
     this._setEventListeners();
 
-    this._element.querySelector('.element__image').src = this._link;
-    this._element.querySelector('.element__name').textContent = this._name;
-    this._element.querySelector('.element__name').alt = this._name;
+    this._elementImg.src = this._link;
+    this._elementName.textContent = this._name;
+    this._elementName.alt = this._name;
 
     return this._element;
   };

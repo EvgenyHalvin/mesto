@@ -25,6 +25,8 @@ export const initialCards = [
   }
 ];
 
+export const cardID = '#card';
+
 // Конфиг для валидатора
 export const configValidation = {
   inputSelector: '.popup__field',

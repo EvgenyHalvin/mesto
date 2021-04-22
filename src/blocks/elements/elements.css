@@ -1,9 +1,15 @@
 .elements {
-	width: 100%;
+	max-width: 100%;
 	margin: 0 auto;
 	display: -ms-grid;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(282px, 282px));
 	grid-column-gap:  17px;
 	grid-row-gap: 20px;
+}
+
+@media screen and (max-width: 635px) {
+	.elements {
+		max-width: 282px;
+	}
 }

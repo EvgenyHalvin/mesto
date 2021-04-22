@@ -30,3 +30,4 @@
 
 **Ссылка на сайт**
 https://evgenyhalvin.github.io/mesto/index.html
+https://evgenyhalvin.github.io/mesto/

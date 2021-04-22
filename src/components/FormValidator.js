@@ -4,6 +4,8 @@ export default class FormValidator {
     this._formElement = formElement;
     this._buttonElement = this._config.submitButtonSelector;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
+    this._spanErrors = Array.from(this._formElement.querySelectorAll(`.${this._config.errorClass}`));
+    this._fieldErrors = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
   }
 
   _showInputError(inputElement) {
@@ -64,5 +66,15 @@ export default class FormValidator {
   // Метод валидации
   enableValidation() {
     this._setEventListeners();
+  }
+
+  cleanValidationErrors() {
+    this._spanErrors.forEach(element => {
+      element.textContent = '';
+    });
+
+    this._fieldErrors.forEach(element => {
+      element.classList.remove(this._config.inputErrorClass);
+    });
   }
 }

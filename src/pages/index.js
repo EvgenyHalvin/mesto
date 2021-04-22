@@ -13,7 +13,8 @@ import {
 	popupAddCard,
 	configValidation,
 	formEditPopup,
-	formAddCard
+	formAddCard,
+	cardID
 } from '../../src/utils/constants.js';
 
 import Section from '../../src/components/Section.js';
@@ -36,7 +37,7 @@ const cardList = new Section({
 function getCard(item) {
 	const newCard = new Card(
 		item,
-		'#card',
+		cardID,
 		() => popupWithImage.open(item.name, item.link)
 	);
 
@@ -52,21 +53,12 @@ addCardButton.addEventListener('click', handleAddCard);
 
 function handleAddCard() {
 	addCardPopup.open();
-	cleanErorrs(document.querySelector(popupAddCard));
+	formValidatorAddCard.cleanValidationErrors();
 }
 
-const addCardPopup = new PopupWithForm( popupAddCard, {
+const addCardPopup = new PopupWithForm(popupAddCard, {
 	handleFormSubmit: (formData) => {
-		const card = new Card({
-			name: formData.name,
-			link: formData.link
-		},
-			'#card',
-			() => popupWithImage.open(formData.name, formData.link));
-
-		const cardElement = card.generateCard();
-
-		cards.prepend(cardElement);
+		cards.prepend(getCard(formData));
 
 		addCardPopup.close();
 	}
@@ -78,7 +70,7 @@ addEditButton.addEventListener('click', handleEditPopup);
 
 function handleEditPopup() {
 	popupEdit.open();
-	cleanErorrs(document.querySelector(popupEditSelector));
+	formValidatorEdit.cleanValidationErrors();
 	const profileInfo = userInfo.getUserInfo();
 	popupProfileName.value = profileInfo.name;
 	popupProfileDescription.value = profileInfo.description;
@@ -106,29 +98,10 @@ addCardPopup.setEventListeners();
 popupEdit.setEventListeners();
 
 // Применение валидации
-const formTypeEdit = document
-	.querySelector(popupEditSelector)
-	.querySelector(formEditPopup);
+const formTypeEdit = document.querySelector(formEditPopup);
 const formValidatorEdit = new FormValidator(configValidation, formTypeEdit);
 formValidatorEdit.enableValidation();
 
-
-const formTypeAddCard = document
-	.querySelector(popupAddCard)
-	.querySelector(formAddCard);
+const formTypeAddCard = document.querySelector(formAddCard);
 const formValidatorAddCard = new FormValidator(configValidation, formTypeAddCard);
 formValidatorAddCard.enableValidation();
-
-// Очищение полей
-function cleanErorrs(popup) {
-	const spanError = popup.querySelectorAll('.popup__field-error');
-	const fieldError = popup.querySelectorAll('.popup__field');
-
-	spanError.forEach(element => {
-		element.textContent = '';
-	});
-
-	fieldError.forEach(element => {
-		element.classList.remove('popup__field_type_error');
-	});
-}
