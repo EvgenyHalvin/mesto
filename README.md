@@ -29,5 +29,4 @@
 Проект собран при помощи сборщика WebPack.
 
 **Ссылка на сайт**
-https://evgenyhalvin.github.io/mesto/index.html
 https://evgenyhalvin.github.io/mesto/
