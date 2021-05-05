@@ -18,6 +18,8 @@
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/profile/__description/profile__description.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__avatar-layout/profile__avatar-layout.css);
+@import url(../blocks/profile/__avatar-wrap/profile__avatar-wrap.css);
 
 /* Стили для elements */
 @import url(../blocks/elements/elements.css);
@@ -28,6 +30,8 @@
 @import url(../blocks/element/__description/element__description.css);
 @import url(../blocks/element/__name/element__name.css);
 @import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__like-area/element__like-area.css);
+@import url(../blocks/element/__like-counter/element__like-counter.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/element/__remove/element__remove.css);
@@ -51,3 +55,5 @@
 @import url(../blocks/popup/__field-error/popup__field-error.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
 @import url(../blocks/popup/__set/popup__set.css);
+@import url(../blocks/popup/__title/_confirm/popup__title_confirm.css);
+@import url(../blocks/popup/__submit-button/popup__submit-button_confirm/popup__submit-button_confirm.css);

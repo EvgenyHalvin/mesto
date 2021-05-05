@@ -15,7 +15,10 @@
 
         <main class="content">
             <section class="profile">
-                <div class="profile__avatar"></div>
+                <div class="profile__avatar-wrap">
+                    <div class="profile__avatar"></div>
+                    <div class="profile__avatar-layout"></div>
+                </div>
                 <div class="profile__profile-into">
                     <div class="profile__wrap">
                         <h1 class="profile__name">Жданов Евгений</h1>
@@ -80,6 +83,30 @@
         </div>
     </div>
 
+    <div class="popup popup_type_confirm">
+        <div class="popup__container">
+            <button type="button" class="popup__close-icon"></button>
+            <h3 class="popup__title popup__title_confirm">Вы уверены?</h3>
+            <button type="button" name="confirm" class="popup__submit-button popup__submit-button_confirm">Да</button>
+        </div>
+    </div>
+
+    <div class="popup popup_type_avatar">
+        <div class="popup__container">
+            <button type="button" class="popup__close-icon"></button>
+            <h3 class="popup__title">Обновить аватар</h3>
+            <form name="popupForm" class="popup__form popup__form_avatar" novalidate>
+                <fieldset class="popup__set">
+                    <input class="popup__field popup__field_type_link-to-img" type="url" 
+                           id="linkPlace-input" name="link" value=""
+                           placeholder="Ссылка на картинку" required>
+                    <span class="linkPlace-input-error popup__field-error"></span>
+                    <button type="submit" name="save" class="popup__submit-button">Сохранить</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
 </body>
 
 <template id="card">
@@ -88,7 +115,10 @@
         <img src="#" class="element__image" alt="#" />
         <div class="element__description">
             <h2 class="element__name"></h2>
-            <button type="button" class="element__like"></button>
+            <div class="element__like-area">
+                <button type="button" class="element__like"></button>
+                <div class="element__like-counter"></div>
+            </div>
         </div>
     </div>
 </template>

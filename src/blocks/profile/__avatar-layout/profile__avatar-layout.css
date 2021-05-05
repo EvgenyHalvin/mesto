@@ -1,0 +1,19 @@
+.profile__avatar-layout {
+  position: absolute;
+  top: -1px; 
+  left: -1px;
+  width: 122px;
+	height: 122px;
+	border-radius: 50%;
+  background-color: #000;
+  background-image: url(../../../images/pen.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.profile__avatar-layout:hover {
+  opacity: 0.8;
+}
