@@ -112,20 +112,6 @@ const addCardPopup = new PopupWithForm(popupAddCard, {
 );
 
 // Редактирование профиля
-api.getUserProfile()
-	.then((data) => {
-		userInfo.setUserInfo({
-			name: data.name,
-			description: data.about,
-		})
-		userInfo.setUserAvatar({
-			avatar: data.avatar
-		})
-	})
-	.catch((err) => {
-		console.log(err);
-	})
-
 addEditButton.addEventListener('click', handleEditPopup);
 
 function handleEditPopup() {
@@ -231,8 +217,15 @@ Promise.all([
 	api.getUserProfile(),
 	api.getInitialCards()
 ])
-	.then(([ userData, cards ]) => {
+	.then(([userData, cards]) => {
 		userMe = userData;
+		userInfo.setUserInfo({
+			name: userData.name,
+			description: userData.about,
+		})
+		userInfo.setUserAvatar({
+			avatar: userData.avatar
+		})
 		cardList.renderItems(cards);
 	})
 	.catch((err) => {
