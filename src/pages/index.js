@@ -29,32 +29,20 @@ import PopupWithForm from '../../src/components/PopupWithForm.js';
 import UserInfo from '../../src/components/UserInfo.js';
 import FormValidator from '../../src/components/FormValidator.js';
 import Api from '../../src/components/Api.js';
-import Popup from "../components/Popup";
+import PopupWithConfirm from "../components/PopupWithConfirm.js";
 
 let userMe;
 
 // Рендер карточек с сервера
 const api = new Api(configApi);
 
-api.getInitialCards()
-	.then((data) => {
-		const cardList = new Section({
-			items: data,
-			renderer: (item) => {
-				cardList.addItem(getCard(item));
-			}
-		}, cards
-		);
-
-		cardList.renderItems();
-	})
-	.catch((err) => {
-		console.log(err);
-	})
+const cardList = new Section({
+	renderer: (item) => cardList.addItem(getCard(item))
+}, cards
+);
 
 // Попап подтверждения и последующее удаление при подтверждении
-const popupConfirm = new Popup(popupConfirmSelector);
-const confirmButton = document.querySelector('.popup__submit-button_confirm');
+const popupWithConfirm = new PopupWithConfirm(popupConfirmSelector);
 
 function getCard(item) {
 	const newCard = new Card(
@@ -63,29 +51,26 @@ function getCard(item) {
 		() => popupWithImage.open(item.name, item.link),
 		{
 			handleDeleteCard: function (itemId, card) {
-				popupConfirm.open();
-				confirmButton.addEventListener('click', () => {
-					api.deleteCard(itemId)
-						.then(() => {
-							card.remove()
-						})
-						.catch((err) => {
-							console.log(err);
-						})
-					popupConfirm.close()
-				})
+				const id = itemId;
+				const cardEl = card;
+				popupWithConfirm.open({
+					deleteCard: function () {
+						api.deleteCard(id)
+							.then(() => {
+								cardEl.remove();
+							})
+							.catch((err) => {
+								console.log(err);
+							})
+						popupWithConfirm.close();
+					}
+				});
 			},
-			handleLikeCard: function (cardId, condition) {
+			handleLikeCard: function (card, condition) {
 				if (condition === 'isLiked') {
-					api.deleteLike(cardId)
-						.catch((err) => {
-							console.log(err);
-						})
+					return api.deleteLike(card._id)
 				} else {
-					api.addLike(cardId)
-						.catch((err) => {
-							console.log(err);
-						})
+					return api.addLike(card._id)
 				}
 			}
 		},
@@ -96,15 +81,6 @@ function getCard(item) {
 }
 
 const popupWithImage = new PopupWithImage(showImage);
-
-// Используем эту часть кода для записи данных пользователя в userMe.
-api.getUserProfile()
-	.then((res) => {
-		userMe = res
-	})
-	.catch((err) => {
-		console.log(err);
-	})
 
 // Добавление карточки
 addCardButton.addEventListener('click', handleAddCard);
@@ -194,11 +170,11 @@ const popupEdit = new PopupWithForm(popupEditSelector, {
 const popupAvatar = new PopupWithForm(popupAvatarSelector, {
 	handleFormSubmit: (avatarLink) => {
 		renderLoading(true, formAvatarPopupSelector)
-		userInfo.setUserAvatar({
-			avatar: avatarLink.link
-		})
 		api.updateAvatar(avatarLink.link)
 			.then(() => {
+				userInfo.setUserAvatar({
+					avatar: avatarLink.link
+				})
 				popupAvatar.close();
 			})
 			.catch((err) => {
@@ -221,15 +197,19 @@ function renderLoading(isLoading, formSelector) {
 	const currentForm = document.querySelector(formSelector)
 	const currentTextButton = currentForm.querySelector('.popup__submit-button');
 
-	if(isLoading) {
-		currentTextButton.textContent = 'Сохранение...'
+	if (isLoading) {
+		currentTextButton.textContent = 'Сохранение...';
+		currentTextButton.setAttribute('disabled', true);
+		currentTextButton.style.backgroundColor = '#787373'
 	} else {
-		currentTextButton.textContent = 'Сохранить'
+		currentTextButton.textContent = 'Сохранить';
+		currentTextButton.removeAttribute('disabled', true);
+		currentTextButton.style.backgroundColor = '#000'
 	}
 }
 
 popupAvatar.setEventListeners();
-popupConfirm.setEventListeners();
+popupWithConfirm.setEventListeners();
 popupWithImage.setEventListeners();
 addCardPopup.setEventListeners();
 popupEdit.setEventListeners();
@@ -246,3 +226,15 @@ formValidatorEdit.enableValidation();
 const formTypeAddCard = document.querySelector(formAddCard);
 const formValidatorAddCard = new FormValidator(configValidation, formTypeAddCard);
 formValidatorAddCard.enableValidation();
+
+Promise.all([
+	api.getUserProfile(),
+	api.getInitialCards()
+])
+	.then(([ userData, cards ]) => {
+		userMe = userData;
+		cardList.renderItems(cards);
+	})
+	.catch((err) => {
+		console.log(err);
+	})

@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(item, cardSelector, handleCardClick, {handleDeleteCard, handleLikeCard}, userMe) {
+  constructor(item, cardSelector, handleCardClick, { handleDeleteCard, handleLikeCard }, userMe) {
     this._cardSelector = cardSelector;
     this._item = item;
     this._name = item.name;
@@ -27,22 +27,15 @@ export default class Card {
     return cardElement;
   };
 
-  _likeCard(evt) {
-    evt.target.classList.toggle(this._likeIsActiveSelctor);
-
+  _setLikesInfo(cardData) {
     this._likeCounter = this._element.querySelector(this._likeCounterSelector);
+    this._likeCounter.textContent = cardData.likes.length;
+    this._likeElement = this._element.querySelector(this._likeSelector);
+    this._likeElement.classList.toggle(this._likeIsActiveSelctor)
+  }
 
-    if (evt.target.classList.contains(this._likeIsActiveSelctor)) {
-      this._likeCounter.textContent = this._amountLikes + 1;
-      this._amountLikes = this._amountLikes + 1
-    } else {
-      this._likeCounter.textContent = this._amountLikes - 1
-      this._amountLikes = this._amountLikes - 1
-    }
-  };
-  
   _showLikes() {
-    if(this._itemLikes.find(item => item._id === this._userId)) {
+    if (this._itemLikes.find(item => item._id === this._userId)) {
       this._element
         .querySelector(this._likeSelector)
         .classList
@@ -67,20 +60,31 @@ export default class Card {
       this._handleCardClick();
     })
 
-    this._element.querySelector(this._likeSelector).addEventListener('click', (event) => {
-      this._likeCard(event);
-      
-      if(this._item.likes.find(item => item._id === this._userId)) {
-        const condition = 'isLiked';
-        this._handleLikeCard(this._itemId, condition);
+    this._likeElement = this._element.querySelector(this._likeSelector);
+
+    this._likeElement.addEventListener('click', () => {
+      if (this._likeElement.classList.contains(this._likeIsActiveSelctor)) {
+        this._handleLikeCard(this._item, 'isLiked')
+          .then((cardData) => {
+            this._setLikesInfo(cardData)
+          })
+          .catch((err) => {
+            console.log(`Ошибка снятия лайка: ${err}`);
+          })
       } else {
-        this._handleLikeCard(this._itemId);
+        this._handleLikeCard(this._item)
+          .then((cardData) => {
+            this._setLikesInfo(cardData);
+          })
+          .catch((err) => {
+            console.log(`Ошибка добавления лайка: ${err}`);
+          })
       }
     });
 
     // Значки удаления только на своих карточках
     this._removeEl = this._element.querySelector('.element__remove')
-    if(this._userId === this._ownerItemId) {
+    if (this._userId === this._ownerItemId) {
       this._removeEl.addEventListener('click', () => {
         this._deleteCard();
       });
@@ -99,7 +103,7 @@ export default class Card {
     this._elementImg.src = this._link;
     this._elementName.textContent = this._name;
     this._elementName.alt = this._name;
-    
+
     return this._element;
   };
 };
